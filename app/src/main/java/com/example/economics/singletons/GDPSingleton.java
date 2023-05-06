@@ -1,4 +1,4 @@
-package com.example.economics;
+package com.example.economics.singletons;
 
 import android.content.Context;
 
@@ -6,19 +6,19 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
 
-public class ConsumerPriceIndexSingleton {
-    private static ConsumerPriceIndexSingleton instance;
+public class GDPSingleton {
+    private static GDPSingleton instance;
     private RequestQueue requestQueue;
     private static Context ctx;
 
-    private ConsumerPriceIndexSingleton(Context context) {
+    private GDPSingleton(Context context) {
         ctx = context;
         requestQueue = getRequestQueue();
     }
 
-    public static synchronized ConsumerPriceIndexSingleton getInstance(Context context) {
+    public static synchronized GDPSingleton getInstance(Context context) {
         if (instance == null) {
-            instance = new ConsumerPriceIndexSingleton(context);
+            instance = new GDPSingleton(context);
         }
         return instance;
     }

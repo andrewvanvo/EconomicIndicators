@@ -1,4 +1,4 @@
-package com.example.economics;
+package com.example.economics.singletons;
 
 import android.content.Context;
 
@@ -6,19 +6,19 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
 
-public class YieldsSingleton {
-    private static YieldsSingleton instance;
+public class UnemploymentSingleton {
+    private static UnemploymentSingleton instance;
     private RequestQueue requestQueue;
     private static Context ctx;
 
-    private YieldsSingleton(Context context) {
+    private UnemploymentSingleton(Context context) {
         ctx = context;
         requestQueue = getRequestQueue();
     }
 
-    public static synchronized YieldsSingleton getInstance(Context context) {
+    public static synchronized UnemploymentSingleton getInstance(Context context) {
         if (instance == null) {
-            instance = new YieldsSingleton(context);
+            instance = new UnemploymentSingleton(context);
         }
         return instance;
     }
@@ -38,4 +38,6 @@ public class YieldsSingleton {
 
 
 }
+
+
 

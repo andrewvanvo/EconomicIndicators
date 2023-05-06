@@ -7,11 +7,20 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.example.economics.services.ConsumerPriceIndexService;
+import com.example.economics.services.FedFundsRateService;
+import com.example.economics.services.GDPService;
+import com.example.economics.services.UnemploymentService;
+import com.example.economics.services.YieldsService;
+
 public class MainActivity extends AppCompatActivity {
 
     Button federalFundsRateButton;
     Button treasuryYieldButton;
     Button consumerPriceIndexButton;
+    Button gdpButton;
+    Button unemploymentButton;
+    Button durableButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,6 +81,46 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(String monthlyInflation) {
                         Toast.makeText(MainActivity.this, "Inflation MoM: "+ monthlyInflation +"%", Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+            }
+        });
+
+        gdpButton = findViewById(R.id.gdpButton);
+        gdpButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                GDPService gdpService = new GDPService(MainActivity.this);
+                gdpService.getLatestGDP(new GDPService.VolleyResponseListener() {
+                    @Override
+                    public void onError(String message) {
+                        Toast.makeText(MainActivity.this, "Something Broke", Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onResponse(String quarterlyGDP) {
+                        Toast.makeText(MainActivity.this, "GDP QoQ: $"+ quarterlyGDP +"bn", Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+            }
+        });
+
+        unemploymentButton = findViewById(R.id.unemploymentButton);
+        unemploymentButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                UnemploymentService unemploymentService = new UnemploymentService(MainActivity.this);
+                unemploymentService.getLatestUnemployment(new UnemploymentService.VolleyResponseListener() {
+                    @Override
+                    public void onError(String message) {
+                        Toast.makeText(MainActivity.this, "Something Broke", Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onResponse(String monthlyUnemployment) {
+                        Toast.makeText(MainActivity.this, "Unemployment MoM: "+ monthlyUnemployment +"%", Toast.LENGTH_SHORT).show();
                     }
                 });
 

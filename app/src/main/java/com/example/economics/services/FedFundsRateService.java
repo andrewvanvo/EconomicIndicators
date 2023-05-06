@@ -1,4 +1,4 @@
-package com.example.economics;
+package com.example.economics.services;
 
 import android.content.Context;
 
@@ -6,6 +6,7 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.example.economics.singletons.FederalFundsRateSingleton;
 
 import org.json.JSONArray;
 import org.json.JSONException;

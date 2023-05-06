@@ -1,4 +1,4 @@
-package com.example.economics;
+package com.example.economics.services;
 
 import android.content.Context;
 
@@ -6,45 +6,47 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.example.economics.singletons.GDPSingleton;
+import com.example.economics.singletons.YieldsSingleton;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class YieldsService {
-    public static final String YIELDS_INTERVAL_MONTHLY_APIKEY_DEMO = "https://www.alphavantage.co/query?function=TREASURY_YIELD&interval=monthly&maturity=10year&apikey=demo";
+public class GDPService {
+    public static final String GDP_INTERVAL_QUARTERLY_APIKEY_DEMO = "https://www.alphavantage.co/query?function=REAL_GDP&interval=annual&apikey=demo";
     Context context;
-    String latestYields;
+    String latestGDP;
 
-    public YieldsService(Context context) {
+    public GDPService(Context context) {
         this.context = context;
     }
 
     public interface VolleyResponseListener {
         void onError(String message);
-        void onResponse(String latestYields);
+        void onResponse(String latestGDP);
     }
 
-    public void getLatestYields(FedFundsRateService.VolleyResponseListener volleyResponseListener){
+    public void getLatestGDP(GDPService.VolleyResponseListener volleyResponseListener){
 
-        String url = YIELDS_INTERVAL_MONTHLY_APIKEY_DEMO;
+        String url = GDP_INTERVAL_QUARTERLY_APIKEY_DEMO;
 
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
                 (Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
 
                     @Override
                     public void onResponse(JSONObject response) {
-                        JSONArray yieldsArray;
-                        JSONObject latestYieldsObject;
-                        latestYields = null;
+                        JSONArray gdpArray;
+                        JSONObject latestGdpObject;
+                        latestGDP = null;
                         try {
-                            yieldsArray = response.getJSONArray("data");
-                            latestYieldsObject = yieldsArray.getJSONObject(0);
-                            latestYields = latestYieldsObject.getString("value");
+                            gdpArray = response.getJSONArray("data");
+                            latestGdpObject = gdpArray.getJSONObject(0);
+                            latestGDP = latestGdpObject.getString("value");
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
-                        volleyResponseListener.onResponse(latestYields);
+                        volleyResponseListener.onResponse(latestGDP);
                     }
                 }, new Response.ErrorListener() {
 
@@ -55,7 +57,8 @@ public class YieldsService {
                 });
 
 
-        YieldsSingleton.getInstance(context).addToRequestQueue(jsonObjectRequest);
+        GDPSingleton.getInstance(context).addToRequestQueue(jsonObjectRequest);
     }
 
 }
+
