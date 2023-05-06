@@ -58,5 +58,25 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        consumerPriceIndexButton = findViewById(R.id.cpiButton);
+        consumerPriceIndexButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ConsumerPriceIndexService consumerPriceIndexService = new ConsumerPriceIndexService(MainActivity.this);
+                consumerPriceIndexService.getLatestCPI(new ConsumerPriceIndexService.VolleyResponseListener() {
+                    @Override
+                    public void onError(String message) {
+                        Toast.makeText(MainActivity.this, "Something Broke", Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onResponse(String monthlyInflation) {
+                        Toast.makeText(MainActivity.this, "Inflation MoM: "+ monthlyInflation +"%", Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+            }
+        });
+
     }
 }
