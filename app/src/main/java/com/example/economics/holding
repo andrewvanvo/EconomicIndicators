@@ -1,0 +1,51 @@
+<Button
+        android:id="@+id/federalFundsRateButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Fed Fund Rate"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints" />
+
+    <Button
+        android:id="@+id/yieldButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Treasury Yield"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/cpiButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Inflation"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/federalFundsRateButton" />
+
+    <Button
+        android:id="@+id/gdpButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="GDP"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cpiButton" />
+
+    <Button
+        android:id="@+id/unemploymentButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Unemployment Rate"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/yieldButton" />
+
+
+    <Button
+        android:id="@+id/durableButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Durable Goods Orders"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/unemploymentButton" />
+
+

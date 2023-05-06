@@ -1,3 +1,12 @@
 <resources>
     <string name="app_name">Economics</string>
+    <string name="placeholder">Placeholder</string>
+    <string-array name="econ_indicators_titles">
+        <item name="ffr">Federal Funds Rate</item>
+        <item name="gdp">GDP</item>
+        <item name="inflation">Inflation</item>
+        <item name="yields">Treasury Yields</item>
+        <item name="unemployment">Unemployment Rate</item>
+        <item name="durable">Durable Goods Orders</item>
+    </string-array>
 </resources>
