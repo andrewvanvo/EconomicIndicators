@@ -27,13 +27,23 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        button = findViewById(R.id.button);
+        button = findViewById(R.id.federalFundsRateButton);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 FedFundsRateService fedFundsRateService = new FedFundsRateService(MainActivity.this);
-                String fedFundsRate = fedFundsRateService.getLatestFedFundsRate();
-                Toast.makeText(MainActivity.this, "FFR: "+ fedFundsRate + "%", Toast.LENGTH_SHORT).show();
+                fedFundsRateService.getLatestFedFundsRate(new FedFundsRateService.VolleyResponseListener() {
+                    @Override
+                    public void onError(String message) {
+                        Toast.makeText(MainActivity.this, "Something Broke", Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onResponse(String latestFedFundsRate) {
+                        Toast.makeText(MainActivity.this, "FFR: "+ latestFedFundsRate + "%", Toast.LENGTH_SHORT).show();
+                    }
+                });
+
             }
         });
 

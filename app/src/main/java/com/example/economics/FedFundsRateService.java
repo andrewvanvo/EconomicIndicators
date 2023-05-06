@@ -1,7 +1,6 @@
 package com.example.economics;
 
 import android.content.Context;
-import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -24,11 +23,10 @@ public class FedFundsRateService {
 
     public interface VolleyResponseListener {
         void onError(String message);
-
-        void onResponse(Object response);
+        void onResponse(String latestFedFundsRate);
     }
 
-    public String getLatestFedFundsRate(){
+    public void getLatestFedFundsRate(VolleyResponseListener volleyResponseListener){
 
         String url = FEDERAL_FUNDS_RATE_INTERVAL_MONTHLY_APIKEY_DEMO;
 
@@ -47,25 +45,17 @@ public class FedFundsRateService {
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
-                        Toast.makeText(context, latestFedFundsRate + "%", Toast.LENGTH_SHORT).show();
+                        volleyResponseListener.onResponse(latestFedFundsRate);
                     }
                 }, new Response.ErrorListener() {
 
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(context, "Something broke", Toast.LENGTH_SHORT).show();
-
+                        volleyResponseListener.onError("No FFR Retrieved");
                     }
                 });
 
-        //queue.add(jsonObjectRequest);
-        // Add a request (in this example, called stringRequest) to your RequestQueue.
-        MySingleton.getInstance(context).addToRequestQueue(jsonObjectRequest);
 
-        return latestFedFundsRate;
+        FederalFundsRateSingleton.getInstance(context).addToRequestQueue(jsonObjectRequest);
     }
-
-//    public List<FedFundsRateHistorical> getOldFedFundRates(){
-//
-//    }
 }
