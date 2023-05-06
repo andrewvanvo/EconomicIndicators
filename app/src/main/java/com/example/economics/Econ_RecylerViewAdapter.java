@@ -75,9 +75,6 @@ public class Econ_RecylerViewAdapter extends RecyclerView.Adapter<Econ_RecylerVi
                 }
                 view.getContext().startActivity(intent);
 
-
-//                Toast.makeText(context, econIndicatorModels.get(holder.getAdapterPosition()).getIndicatorName(),
-//                        Toast.LENGTH_SHORT).show();
             }
         });
 
