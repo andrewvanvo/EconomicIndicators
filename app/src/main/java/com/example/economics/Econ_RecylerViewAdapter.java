@@ -1,15 +1,22 @@
 package com.example.economics;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.economics.activities.DurableActivity;
+import com.example.economics.activities.FedFundsRateActivity;
+import com.example.economics.activities.GdpActivity;
+import com.example.economics.activities.InflationActivity;
+import com.example.economics.activities.TreasuryYieldsActivity;
+import com.example.economics.activities.UnemploymentActivity;
 
 import java.util.ArrayList;
 
@@ -40,8 +47,37 @@ public class Econ_RecylerViewAdapter extends RecyclerView.Adapter<Econ_RecylerVi
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(context, econIndicatorModels.get(holder.getAdapterPosition()).getIndicatorName(),
-                        Toast.LENGTH_SHORT).show();
+                String indicator = econIndicatorModels.get(holder.getAdapterPosition()).getIndicatorName();
+                Intent intent = null;
+
+                switch(indicator){
+                    case "Federal Funds Rate":
+                        intent = new Intent(view.getContext(), FedFundsRateActivity.class);
+                        break;
+                    case "GDP":
+                        intent = new Intent(view.getContext(), GdpActivity.class);
+                        break;
+                    case "Inflation":
+                        intent = new Intent(view.getContext(), InflationActivity.class);
+                        break;
+                    case "Treasury Yields":
+                        intent = new Intent(view.getContext(), TreasuryYieldsActivity.class);
+                        break;
+                    case "Unemployment Rate":
+                        intent = new Intent(view.getContext(), UnemploymentActivity.class);
+                        break;
+                    case "Durable Goods Orders":
+                        intent = new Intent(view.getContext(), DurableActivity.class);
+                        break;
+                    default:
+                        intent = new Intent(view.getContext(), MainActivity.class);
+                        break;
+                }
+                view.getContext().startActivity(intent);
+
+
+//                Toast.makeText(context, econIndicatorModels.get(holder.getAdapterPosition()).getIndicatorName(),
+//                        Toast.LENGTH_SHORT).show();
             }
         });
 
