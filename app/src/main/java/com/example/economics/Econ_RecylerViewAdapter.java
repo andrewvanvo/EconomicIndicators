@@ -24,6 +24,7 @@ public class Econ_RecylerViewAdapter extends RecyclerView.Adapter<Econ_RecylerVi
 
     Context context;
     ArrayList<EconIndicatorModel> econIndicatorModels;
+
     public Econ_RecylerViewAdapter(Context context, ArrayList<EconIndicatorModel> econIndicatorModels){
         this.context = context;
         this.econIndicatorModels = econIndicatorModels;
@@ -77,7 +78,6 @@ public class Econ_RecylerViewAdapter extends RecyclerView.Adapter<Econ_RecylerVi
 
             }
         });
-
 
     }
 

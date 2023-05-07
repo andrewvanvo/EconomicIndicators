@@ -29,9 +29,11 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //recycler view. Set up recycler adapter after models are set up!
+        //main recycler view. Set up recycler adapter after models are set up!
         RecyclerView recyclerView = findViewById(R.id.econRecyclerView);
+
         setUpEconIndicatorModels();
+
         Econ_RecylerViewAdapter adapter = new Econ_RecylerViewAdapter(this, econIndicatorModel );
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
