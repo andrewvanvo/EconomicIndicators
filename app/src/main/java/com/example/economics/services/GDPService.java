@@ -16,7 +16,8 @@ import org.json.JSONObject;
 public class GDPService {
     public static final String GDP_INTERVAL_QUARTERLY_APIKEY_DEMO = "https://www.alphavantage.co/query?function=REAL_GDP&interval=annual&apikey=demo";
     Context context;
-    String latestGDP;
+    JSONArray gdpArray;
+
 
     public GDPService(Context context) {
         this.context = context;
@@ -24,7 +25,7 @@ public class GDPService {
 
     public interface VolleyResponseListener {
         void onError(String message);
-        void onResponse(String latestGDP);
+        void onResponse(JSONArray gdpArray);
     }
 
     public void getLatestGDP(GDPService.VolleyResponseListener volleyResponseListener){
@@ -36,23 +37,19 @@ public class GDPService {
 
                     @Override
                     public void onResponse(JSONObject response) {
-                        JSONArray gdpArray;
-                        JSONObject latestGdpObject;
-                        latestGDP = null;
+
                         try {
                             gdpArray = response.getJSONArray("data");
-                            latestGdpObject = gdpArray.getJSONObject(0);
-                            latestGDP = latestGdpObject.getString("value");
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
-                        volleyResponseListener.onResponse(latestGDP);
+                        volleyResponseListener.onResponse(gdpArray);
                     }
                 }, new Response.ErrorListener() {
 
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        volleyResponseListener.onError("No Yields Retrieved");
+                        volleyResponseListener.onError("No GDP Retrieved");
                     }
                 });
 

@@ -11,10 +11,15 @@ import com.example.economics.MainActivity;
 import com.example.economics.R;
 import com.example.economics.services.FedFundsRateService;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 public class FedFundsRateActivity extends AppCompatActivity {
 
-
-
+    JSONArray dataArray;
+    JSONObject latestFedFundsObject;
+    String latestFedFundsRate;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,9 +36,17 @@ public class FedFundsRateActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onResponse(String latestFedFundsRate) {
+            public void onResponse(JSONArray fedFundsArray) {
+                dataArray = fedFundsArray;
+                try {
+                    latestFedFundsObject = dataArray.getJSONObject(0);
+                    latestFedFundsRate = latestFedFundsObject.getString("value");
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
                 loadingDialog.dismissDialog();
-                Toast.makeText(FedFundsRateActivity.this, "FFR: "+ latestFedFundsRate + "%", Toast.LENGTH_SHORT).show();
+                Toast.makeText(FedFundsRateActivity.this, latestFedFundsRate, Toast.LENGTH_SHORT).show();
             }
         });
 

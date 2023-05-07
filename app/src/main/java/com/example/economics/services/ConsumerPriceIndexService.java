@@ -15,9 +15,10 @@ import org.json.JSONObject;
 
 public class ConsumerPriceIndexService {
 
-    public static final String CPI_INTERVAL_MONTHLY_APIKEY_DEMO = "https://www.alphavantage.co/query?function=CPI&interval=monthly&apikey=demo";
     Context context;
-    String monthlyInflation;
+    JSONArray CPI_Array;
+
+    public static final String CPI_INTERVAL_MONTHLY_APIKEY_DEMO = "https://www.alphavantage.co/query?function=CPI&interval=monthly&apikey=demo";
 
     public ConsumerPriceIndexService(Context context) {
         this.context = context;
@@ -25,7 +26,7 @@ public class ConsumerPriceIndexService {
 
     public interface VolleyResponseListener {
         void onError(String message);
-        void onResponse(String latestCPI);
+        void onResponse(JSONArray inflationArray);
     }
 
     public void getLatestCPI(VolleyResponseListener volleyResponseListener){
@@ -37,32 +38,18 @@ public class ConsumerPriceIndexService {
 
                     @Override
                     public void onResponse(JSONObject response) {
-                        JSONArray CPI_Array;
-                        JSONObject latest_CPI_Object;
-                        JSONObject previous_CPI_Object;
-                        Float latestCPI;
-                        Float previousCPI;
                         try {
                             CPI_Array = response.getJSONArray("data");
-                            latest_CPI_Object = CPI_Array.getJSONObject(0);
-                            previous_CPI_Object = CPI_Array.getJSONObject(1);
-                            latestCPI = Float.parseFloat(latest_CPI_Object.getString("value"));
-                            previousCPI = Float.parseFloat(previous_CPI_Object.getString("value"));
-                            Float calculated = ((latestCPI-previousCPI)/previousCPI)*100;
-
-                            //monthlyInflation = Float.toString(calculated);
-                            monthlyInflation = String.format("%.1f", calculated);
-
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
-                        volleyResponseListener.onResponse(monthlyInflation);
+                        volleyResponseListener.onResponse(CPI_Array);
                     }
                 }, new Response.ErrorListener() {
 
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        volleyResponseListener.onError("No FFR Retrieved");
+                        volleyResponseListener.onError("No inflation Retrieved");
                     }
                 });
 

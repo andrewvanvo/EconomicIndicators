@@ -10,7 +10,15 @@ import com.example.economics.MainActivity;
 import com.example.economics.R;
 import com.example.economics.services.UnemploymentService;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 public class UnemploymentActivity extends AppCompatActivity {
+
+    JSONArray dataArray;
+    JSONObject latestUnemploymentObject;
+    String latestUnemployment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,9 +36,19 @@ public class UnemploymentActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onResponse(String monthlyUnemployment) {
+            public void onResponse(JSONArray unemploymentArray) {
+                dataArray = unemploymentArray;
+
+                try {
+                    latestUnemploymentObject = unemploymentArray.getJSONObject(0);
+                    latestUnemployment = latestUnemploymentObject.getString("value");
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+
                 loadingDialog.dismissDialog();
-                Toast.makeText(UnemploymentActivity.this, "Unemployment MoM: "+ monthlyUnemployment +"%", Toast.LENGTH_SHORT).show();
+                Toast.makeText(UnemploymentActivity.this, "Unemployment MoM: "+ latestUnemployment +"%", Toast.LENGTH_SHORT).show();
             }
         });
     }

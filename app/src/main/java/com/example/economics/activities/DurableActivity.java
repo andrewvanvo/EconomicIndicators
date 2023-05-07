@@ -10,7 +10,18 @@ import com.example.economics.MainActivity;
 import com.example.economics.R;
 import com.example.economics.services.DurableService;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 public class DurableActivity extends AppCompatActivity {
+
+    JSONArray dataArray;
+    JSONObject latestDurableObject;
+    String latestDurable;
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,9 +39,18 @@ public class DurableActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onResponse(String monthlyDurable) {
+            public void onResponse(JSONArray durableArray) {
+                dataArray = durableArray;
+
+                try {
+                    latestDurableObject = durableArray.getJSONObject(0);
+                    latestDurable = latestDurableObject.getString("value");
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
                 loadingDialog.dismissDialog();
-                Toast.makeText(DurableActivity.this, "Durable MoM: $"+ monthlyDurable + "m", Toast.LENGTH_SHORT).show();
+                Toast.makeText(DurableActivity.this, "Durable MoM: $"+ latestDurable + "m", Toast.LENGTH_SHORT).show();
             }
         });
 

@@ -17,7 +17,7 @@ import org.json.JSONObject;
 public class UnemploymentService {
     public static final String UNEMPLOYMENT_INTERVAL_MONTHLY_APIKEY_DEMO = "https://www.alphavantage.co/query?function=UNEMPLOYMENT&apikey=demo";
     Context context;
-    String latestUnemployment;
+    JSONArray unemploymentArray;
 
     public UnemploymentService(Context context) {
         this.context = context;
@@ -25,7 +25,7 @@ public class UnemploymentService {
 
     public interface VolleyResponseListener {
         void onError(String message);
-        void onResponse(String latestUnemployment);
+        void onResponse(JSONArray unemploymentArray);
     }
 
     public void getLatestUnemployment(UnemploymentService.VolleyResponseListener volleyResponseListener){
@@ -37,23 +37,19 @@ public class UnemploymentService {
 
                     @Override
                     public void onResponse(JSONObject response) {
-                        JSONArray unemploymentArray;
-                        JSONObject latestUnemploymentObject;
-                        latestUnemployment = null;
                         try {
                             unemploymentArray = response.getJSONArray("data");
-                            latestUnemploymentObject = unemploymentArray.getJSONObject(0);
-                            latestUnemployment = latestUnemploymentObject.getString("value");
+
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
-                        volleyResponseListener.onResponse(latestUnemployment);
+                        volleyResponseListener.onResponse(unemploymentArray);
                     }
                 }, new Response.ErrorListener() {
 
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        volleyResponseListener.onError("No Yields Retrieved");
+                        volleyResponseListener.onError("No unemployment Retrieved");
                     }
                 });
 

@@ -18,7 +18,8 @@ import org.json.JSONObject;
 public class DurableService {
     public static final String DURABLE_INTERVAL_MONTHLY_APIKEY_DEMO = "https://www.alphavantage.co/query?function=DURABLES&apikey=demo";
     Context context;
-    String latestDurable;
+    JSONArray durableArray;
+
 
     public DurableService(Context context) {
         this.context = context;
@@ -26,7 +27,7 @@ public class DurableService {
 
     public interface VolleyResponseListener {
         void onError(String message);
-        void onResponse(String latestDurable);
+        void onResponse(JSONArray durableArray);
     }
 
     public void getLatestDurable(DurableService.VolleyResponseListener volleyResponseListener){
@@ -38,23 +39,18 @@ public class DurableService {
 
                     @Override
                     public void onResponse(JSONObject response) {
-                        JSONArray durableArray;
-                        JSONObject latestDurableObject;
-                        latestDurable = null;
                         try {
                             durableArray = response.getJSONArray("data");
-                            latestDurableObject = durableArray.getJSONObject(0);
-                            latestDurable = latestDurableObject.getString("value");
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
-                        volleyResponseListener.onResponse(latestDurable);
+                        volleyResponseListener.onResponse(durableArray);
                     }
                 }, new Response.ErrorListener() {
 
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        volleyResponseListener.onError("No Yields Retrieved");
+                        volleyResponseListener.onError("No Durables Retrieved");
                     }
                 });
 

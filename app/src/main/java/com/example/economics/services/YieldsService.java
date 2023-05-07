@@ -15,7 +15,7 @@ import org.json.JSONObject;
 public class YieldsService {
     public static final String YIELDS_INTERVAL_MONTHLY_APIKEY_DEMO = "https://www.alphavantage.co/query?function=TREASURY_YIELD&interval=monthly&maturity=10year&apikey=demo";
     Context context;
-    String latestYields;
+    JSONArray yieldsArray;
 
     public YieldsService(Context context) {
         this.context = context;
@@ -23,10 +23,10 @@ public class YieldsService {
 
     public interface VolleyResponseListener {
         void onError(String message);
-        void onResponse(String latestYields);
+        void onResponse(JSONArray yieldsArray);
     }
 
-    public void getLatestYields(FedFundsRateService.VolleyResponseListener volleyResponseListener){
+    public void getLatestYields(YieldsService.VolleyResponseListener volleyResponseListener){
 
         String url = YIELDS_INTERVAL_MONTHLY_APIKEY_DEMO;
 
@@ -35,17 +35,13 @@ public class YieldsService {
 
                     @Override
                     public void onResponse(JSONObject response) {
-                        JSONArray yieldsArray;
-                        JSONObject latestYieldsObject;
-                        latestYields = null;
+
                         try {
                             yieldsArray = response.getJSONArray("data");
-                            latestYieldsObject = yieldsArray.getJSONObject(0);
-                            latestYields = latestYieldsObject.getString("value");
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
-                        volleyResponseListener.onResponse(latestYields);
+                        volleyResponseListener.onResponse(yieldsArray);
                     }
                 }, new Response.ErrorListener() {
 

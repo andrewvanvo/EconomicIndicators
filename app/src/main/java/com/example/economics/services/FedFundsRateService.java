@@ -16,7 +16,7 @@ public class FedFundsRateService {
 
     public static final String FEDERAL_FUNDS_RATE_INTERVAL_MONTHLY_APIKEY_DEMO = "https://www.alphavantage.co/query?function=FEDERAL_FUNDS_RATE&interval=monthly&apikey=demo";
     Context context;
-    String latestFedFundsRate;
+    JSONArray fedFundsArray;
 
     public FedFundsRateService(Context context) {
         this.context = context;
@@ -24,7 +24,7 @@ public class FedFundsRateService {
 
     public interface VolleyResponseListener {
         void onError(String message);
-        void onResponse(String latestFedFundsRate);
+        void onResponse(JSONArray fedFundsArray);
     }
 
     public void getLatestFedFundsRate(VolleyResponseListener volleyResponseListener){
@@ -36,17 +36,13 @@ public class FedFundsRateService {
 
                     @Override
                     public void onResponse(JSONObject response) {
-                        JSONArray fedFundsArray;
-                        JSONObject latestFedFundsObject;
-                        latestFedFundsRate = null;
                         try {
                             fedFundsArray = response.getJSONArray("data");
-                            latestFedFundsObject = fedFundsArray.getJSONObject(0);
-                            latestFedFundsRate = latestFedFundsObject.getString("value");
+
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
-                        volleyResponseListener.onResponse(latestFedFundsRate);
+                        volleyResponseListener.onResponse(fedFundsArray);
                     }
                 }, new Response.ErrorListener() {
 

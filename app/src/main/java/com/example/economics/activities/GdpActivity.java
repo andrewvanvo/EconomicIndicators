@@ -10,7 +10,14 @@ import com.example.economics.MainActivity;
 import com.example.economics.R;
 import com.example.economics.services.GDPService;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 public class GdpActivity extends AppCompatActivity {
+    JSONArray dataArray;
+    JSONObject latestGdpObject;
+    String latestGDP;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,9 +33,17 @@ public class GdpActivity extends AppCompatActivity {
                 Toast.makeText(GdpActivity.this, "Something Broke", Toast.LENGTH_SHORT).show();
             }
             @Override
-            public void onResponse(String quarterlyGDP) {
+            public void onResponse(JSONArray gdpArray) {
+                dataArray = gdpArray;
+                try {
+                    latestGdpObject = gdpArray.getJSONObject(0);
+                    latestGDP = latestGdpObject.getString("value");
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
                 loadingDialog.dismissDialog();
-                Toast.makeText(GdpActivity.this, "GDP QoQ: $"+ quarterlyGDP +"bn", Toast.LENGTH_SHORT).show();
+                Toast.makeText(GdpActivity.this, "GDP QoQ: $"+ latestGDP +"bn", Toast.LENGTH_SHORT).show();
             }
         });
     }
