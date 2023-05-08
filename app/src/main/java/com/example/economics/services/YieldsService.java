@@ -17,6 +17,9 @@ public class YieldsService {
     Context context;
     JSONArray yieldsArray;
 
+    JSONArray sizedDown = new JSONArray();
+    JSONArray reversed = new JSONArray();
+
     public YieldsService(Context context) {
         this.context = context;
     }
@@ -38,10 +41,17 @@ public class YieldsService {
 
                         try {
                             yieldsArray = response.getJSONArray("data");
+                            for (int i = 0; i <20 ; i++){
+                                sizedDown.put(yieldsArray.get(i));
+                            }
+
+                            for (int i = sizedDown.length()-1;i >= 0; i-- ){
+                                reversed.put(sizedDown.get(i));
+                            }
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
-                        volleyResponseListener.onResponse(yieldsArray);
+                        volleyResponseListener.onResponse(reversed);
                     }
                 }, new Response.ErrorListener() {
 

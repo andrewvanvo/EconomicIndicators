@@ -26,9 +26,6 @@ public class TreasuryYieldsActivity extends AppCompatActivity {
     JSONArray dataArray;
     ArrayList<Econ_Carousel_Model> econCarouselModels = new ArrayList<>();
 
-    JSONObject latestYieldsObject;
-    String latestYields;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

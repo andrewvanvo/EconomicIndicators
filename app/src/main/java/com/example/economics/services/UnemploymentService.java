@@ -18,6 +18,8 @@ public class UnemploymentService {
     public static final String UNEMPLOYMENT_INTERVAL_MONTHLY_APIKEY_DEMO = "https://www.alphavantage.co/query?function=UNEMPLOYMENT&apikey=demo";
     Context context;
     JSONArray unemploymentArray;
+    JSONArray sizedDown = new JSONArray();
+    JSONArray reversed = new JSONArray();
 
     public UnemploymentService(Context context) {
         this.context = context;
@@ -37,13 +39,20 @@ public class UnemploymentService {
 
                     @Override
                     public void onResponse(JSONObject response) {
+
                         try {
                             unemploymentArray = response.getJSONArray("data");
+                            for (int i = 0; i <20 ; i++){
+                                sizedDown.put(unemploymentArray.get(i));
+                            }
 
+                            for (int i = sizedDown.length()-1;i >= 0; i-- ){
+                                reversed.put(sizedDown.get(i));
+                            }
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
-                        volleyResponseListener.onResponse(unemploymentArray);
+                        volleyResponseListener.onResponse(reversed);
                     }
                 }, new Response.ErrorListener() {
 
