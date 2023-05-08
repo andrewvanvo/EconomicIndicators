@@ -1,6 +1,7 @@
 package com.example.economics.services;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -17,6 +18,8 @@ public class FedFundsRateService {
     public static final String FEDERAL_FUNDS_RATE_INTERVAL_MONTHLY_APIKEY_DEMO = "https://www.alphavantage.co/query?function=FEDERAL_FUNDS_RATE&interval=monthly&apikey=demo";
     Context context;
     JSONArray fedFundsArray;
+    JSONArray sizedDown = new JSONArray();
+    JSONArray reversed = new JSONArray();
 
     public FedFundsRateService(Context context) {
         this.context = context;
@@ -36,13 +39,24 @@ public class FedFundsRateService {
 
                     @Override
                     public void onResponse(JSONObject response) {
+
                         try {
+
                             fedFundsArray = response.getJSONArray("data");
+                            for (int i = 0; i < 60; i++){
+                                sizedDown.put(fedFundsArray.get(i));
+                            }
+
+                            for (int i = sizedDown.length()-1;i >= 0; i-- ){
+                                reversed.put(sizedDown.get(i));
+                            }
 
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
-                        volleyResponseListener.onResponse(fedFundsArray);
+
+                        Log.d("responseSent", reversed.toString());
+                        volleyResponseListener.onResponse(reversed);
                     }
                 }, new Response.ErrorListener() {
 
