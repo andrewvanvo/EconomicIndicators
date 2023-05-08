@@ -20,6 +20,9 @@ public class DurableService {
     Context context;
     JSONArray durableArray;
 
+    JSONArray sizedDown = new JSONArray();
+    JSONArray reversed = new JSONArray();
+
 
     public DurableService(Context context) {
         this.context = context;
@@ -41,10 +44,17 @@ public class DurableService {
                     public void onResponse(JSONObject response) {
                         try {
                             durableArray = response.getJSONArray("data");
+                            for (int i = 0; i <20 ; i++){
+                                sizedDown.put(durableArray.get(i));
+                            }
+
+                            for (int i = sizedDown.length()-1;i >= 0; i-- ){
+                                reversed.put(sizedDown.get(i));
+                            }
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
-                        volleyResponseListener.onResponse(durableArray);
+                        volleyResponseListener.onResponse(reversed);
                     }
                 }, new Response.ErrorListener() {
 
