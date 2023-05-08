@@ -8,10 +8,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.economics.adapters.FFR_CarouselRecylerViewAdapter;
+import com.example.economics.adapters.recycler_views.FFR_CarouselRecylerViewAdapter;
 import com.example.economics.models.Econ_Carousel_Model;
 
-import com.example.economics.adapters.FedFundsSparkAdapter;
+import com.example.economics.adapters.spark_adapters.EconSparkAdapter;
 import com.example.economics.LoadingDialog;
 import com.example.economics.R;
 import com.example.economics.services.FedFundsRateService;
@@ -28,7 +28,7 @@ public class FedFundsRateActivity extends AppCompatActivity {
     JSONArray dataArray;
     ArrayList<Econ_Carousel_Model> econCarouselModels = new ArrayList<>();
 
-    FedFundsSparkAdapter fedFundsSparkAdapter;
+    EconSparkAdapter econSparkAdapter;
     SparkView sparkView;
     TextView sparkStat;
     TextView sparkDate;
@@ -96,8 +96,8 @@ public class FedFundsRateActivity extends AppCompatActivity {
 
     private void updateSparkViewWithData(JSONArray dataArray) {
 
-        fedFundsSparkAdapter = new FedFundsSparkAdapter(dataArray);
-        sparkView.setAdapter(fedFundsSparkAdapter);
+        econSparkAdapter = new EconSparkAdapter(dataArray);
+        sparkView.setAdapter(econSparkAdapter);
 
         JSONObject latestFedFundsObject;
         try {

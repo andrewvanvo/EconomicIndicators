@@ -1,4 +1,4 @@
-package com.example.economics.adapters;
+package com.example.economics.adapters.recycler_views;
 
 import android.content.Context;
 import android.view.LayoutInflater;

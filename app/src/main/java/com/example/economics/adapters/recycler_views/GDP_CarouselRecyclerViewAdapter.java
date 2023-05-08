@@ -1,4 +1,4 @@
-package com.example.economics.adapters;
+package com.example.economics.adapters.recycler_views;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -14,26 +14,26 @@ import com.example.economics.models.Econ_Carousel_Model;
 
 import java.util.ArrayList;
 
-public class Durables_CarouselRecyclerViewAdapter extends RecyclerView.Adapter<Durables_CarouselRecyclerViewAdapter.MyViewHolder> {
+public class GDP_CarouselRecyclerViewAdapter extends RecyclerView.Adapter<GDP_CarouselRecyclerViewAdapter.MyViewHolder> {
 
     Context context;
     ArrayList<Econ_Carousel_Model> carouselModels;
 
-    public Durables_CarouselRecyclerViewAdapter(Context context, ArrayList<Econ_Carousel_Model> carouselModels) {
+    public GDP_CarouselRecyclerViewAdapter(Context context, ArrayList<Econ_Carousel_Model> carouselModels) {
         this.context = context;
         this.carouselModels = carouselModels;
     }
 
     @NonNull
     @Override
-    public Durables_CarouselRecyclerViewAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public GDP_CarouselRecyclerViewAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(context);
-        View view = inflater.inflate(R.layout.recycler_view_durable_carousel_item, parent, false);
-        return new Durables_CarouselRecyclerViewAdapter.MyViewHolder(view);
+        View view = inflater.inflate(R.layout.recycler_view_gdp_carousel_item, parent, false);
+        return new GDP_CarouselRecyclerViewAdapter.MyViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull Durables_CarouselRecyclerViewAdapter.MyViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull GDP_CarouselRecyclerViewAdapter.MyViewHolder holder, int position) {
         holder.statView.setText(carouselModels.get(position).getStat());
         holder.descriptorView.setText(carouselModels.get(position).getDescriptor());
     }
@@ -49,8 +49,8 @@ public class Durables_CarouselRecyclerViewAdapter extends RecyclerView.Adapter<D
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
-            statView = itemView.findViewById(R.id.durableStatView);
-            descriptorView = itemView.findViewById(R.id.durableStatDescriptorView);
+            statView = itemView.findViewById(R.id.gdpStatView);
+            descriptorView = itemView.findViewById(R.id.gdpStatDescriptorView);
         }
     }
 

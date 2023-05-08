@@ -1,4 +1,4 @@
-package com.example.economics.adapters;
+package com.example.economics.adapters.spark_adapters;
 
 import com.robinhood.spark.SparkAdapter;
 
@@ -8,12 +8,12 @@ import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
 
-public class FedFundsSparkAdapter extends SparkAdapter {
+public class EconSparkAdapter extends SparkAdapter {
 
     private final JSONArray data;
 
 
-    public FedFundsSparkAdapter(JSONArray data) {
+    public EconSparkAdapter(JSONArray data) {
         this.data = data;
     }
     @Override

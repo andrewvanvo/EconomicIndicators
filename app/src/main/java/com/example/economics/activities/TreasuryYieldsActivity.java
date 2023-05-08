@@ -5,16 +5,16 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.economics.LoadingDialog;
-import com.example.economics.MainActivity;
 import com.example.economics.R;
-import com.example.economics.adapters.Inflation_CarouselRecyclerViewAdapter;
-import com.example.economics.adapters.Yields_CarouselRecyclerViewAdapter;
+import com.example.economics.adapters.recycler_views.Yields_CarouselRecyclerViewAdapter;
+import com.example.economics.adapters.spark_adapters.EconSparkAdapter;
 import com.example.economics.models.Econ_Carousel_Model;
-import com.example.economics.services.FedFundsRateService;
 import com.example.economics.services.YieldsService;
+import com.robinhood.spark.SparkView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -25,6 +25,10 @@ import java.util.ArrayList;
 public class TreasuryYieldsActivity extends AppCompatActivity {
     JSONArray dataArray;
     ArrayList<Econ_Carousel_Model> econCarouselModels = new ArrayList<>();
+    EconSparkAdapter econSparkAdapter;
+    SparkView sparkView;
+    TextView sparkStat;
+    TextView sparkDate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,11 +57,62 @@ public class TreasuryYieldsActivity extends AppCompatActivity {
                 carouselRecyclerView.setAdapter(adapter);
                 carouselRecyclerView.setLayoutManager(new LinearLayoutManager(TreasuryYieldsActivity.this, LinearLayoutManager.HORIZONTAL, false));
 
+                //SparkView Setups
+                sparkView = findViewById(R.id.yieldsSparkView);
+                sparkStat = findViewById(R.id.yieldsHistoricalStat);
+                sparkDate = findViewById(R.id.yieldsHistoricalDate);
+                updateSparkViewWithData(dataArray);
+                setupEventListeners();
+
                 loadingDialog.dismissDialog();
 
             }
         });
     }
+
+    private void setupEventListeners() {
+
+        //user scrubbing
+        sparkView.setScrubEnabled(true);
+        sparkView.setScrubListener(new SparkView.OnScrubListener(){
+            @Override
+            public void onScrubbed(Object value){
+                if(value == null){
+                    sparkStat.setText("--");
+                    sparkDate.setText("--");
+                } else{
+                    updateScrubBoxes((JSONObject) value);
+                }
+            }
+        });
+
+    }
+
+    private void updateSparkViewWithData(JSONArray dataArray) {
+
+        econSparkAdapter = new EconSparkAdapter(dataArray);
+        sparkView.setAdapter(econSparkAdapter);
+
+        JSONObject latestFedFundsObject;
+        try {
+            latestFedFundsObject = dataArray.getJSONObject(dataArray.length()-1);
+            updateScrubBoxes(latestFedFundsObject);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void updateScrubBoxes(JSONObject dataObject) {
+        //change boxes when adapter property is returned (start with latest info)
+        JSONObject item = dataObject;
+        try {
+            sparkStat.setText(item.getString("value"));
+            sparkDate.setText(item.getString("date"));
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+
 
     private void setupCarouselModels(JSONArray data){
         String[] carouselDescriptors = {"Latest", "Previous", "Change" };

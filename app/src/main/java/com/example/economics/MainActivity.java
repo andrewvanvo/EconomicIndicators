@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 
-import com.example.economics.adapters.Econ_RecylerViewAdapter;
+import com.example.economics.adapters.recycler_views.Econ_RecylerViewAdapter;
 import com.example.economics.models.EconIndicatorModel;
 
 import java.util.ArrayList;
