@@ -5,7 +5,9 @@
       <map>
         <entry key="..\:/Users/Red/Desktop/EconomicIndicators/app/src/main/res/layout/activity_fed_funds_rate.xml" value="0.3536458333333333" />
         <entry key="..\:/Users/Red/Desktop/EconomicIndicators/app/src/main/res/layout/activity_gdp.xml" value="0.38333333333333336" />
+        <entry key="..\:/Users/Red/Desktop/EconomicIndicators/app/src/main/res/layout/activity_inflation.xml" value="0.38333333333333336" />
         <entry key="..\:/Users/Red/Desktop/EconomicIndicators/app/src/main/res/layout/activity_main.xml" value="0.3536458333333333" />
+        <entry key="..\:/Users/Red/Desktop/EconomicIndicators/app/src/main/res/layout/recycler_view_cpi_carousel_item.xml" value="0.38333333333333336" />
         <entry key="..\:/Users/Red/Desktop/EconomicIndicators/app/src/main/res/layout/recycler_view_ffr_carousel_item.xml" value="0.33" />
         <entry key="..\:/Users/Red/Desktop/EconomicIndicators/app/src/main/res/layout/recycler_view_gdp_carousel_item.xml" value="0.2875" />
         <entry key="..\:/Users/Red/Desktop/EconomicIndicators/app/src/main/res/layout/recycler_view_row.xml" value="0.340625" />

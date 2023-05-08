@@ -1,27 +1,29 @@
 package com.example.economics.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.widget.Toast;
 
 import com.example.economics.LoadingDialog;
-import com.example.economics.MainActivity;
 import com.example.economics.R;
-import com.example.economics.services.ConsumerPriceIndexService;
+import com.example.economics.adapters.GDP_CarouselRecyclerViewAdapter;
+import com.example.economics.adapters.Inflation_CarouselRecyclerViewAdapter;
+import com.example.economics.models.Econ_Carousel_Model;
+import com.example.economics.services.InflationService;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+
 public class InflationActivity extends AppCompatActivity {
 
     JSONArray dataArray;
-    JSONObject latest_CPI_Object;
-    JSONObject previous_CPI_Object;
-    Float latestCPI;
-    Float previousCPI;
-    String monthlyInflation;
+    ArrayList<Econ_Carousel_Model> econCarouselModels = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,33 +33,58 @@ public class InflationActivity extends AppCompatActivity {
         final LoadingDialog loadingDialog = new LoadingDialog(InflationActivity.this);
         loadingDialog.startLoadingDialog();
 
-        ConsumerPriceIndexService consumerPriceIndexService = new ConsumerPriceIndexService(InflationActivity.this);
-        consumerPriceIndexService.getLatestCPI(new ConsumerPriceIndexService.VolleyResponseListener() {
+        InflationService inflationService = new InflationService(InflationActivity.this);
+        inflationService.getLatestCPI(new InflationService.VolleyResponseListener() {
             @Override
             public void onError(String message) {
                 Toast.makeText(InflationActivity.this, "Something Broke", Toast.LENGTH_SHORT).show();
             }
 
             @Override
-            public void onResponse(JSONArray CPI_Array) {
+            public void onResponse(JSONArray reversed) {
 
-                dataArray = CPI_Array;
-                try {
-                    latest_CPI_Object = CPI_Array.getJSONObject(0);
-                    previous_CPI_Object = CPI_Array.getJSONObject(1);
-                    latestCPI = Float.parseFloat(latest_CPI_Object.getString("value"));
-                    previousCPI = Float.parseFloat(previous_CPI_Object.getString("value"));
-                    Float calculated = ((latestCPI-previousCPI)/previousCPI)*100;
-                    //monthlyInflation = Float.toString(calculated);
-                    monthlyInflation = String.format("%.1f", calculated);
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
+                dataArray = reversed;
+
+                //Recyclerview setups
+                RecyclerView carouselRecyclerView = findViewById(R.id.cpiCarouselRecyclerView);
+                setupCarouselModels(dataArray);
+
+                Inflation_CarouselRecyclerViewAdapter adapter = new Inflation_CarouselRecyclerViewAdapter(InflationActivity.this, econCarouselModels);
+                carouselRecyclerView.setAdapter(adapter);
+                carouselRecyclerView.setLayoutManager(new LinearLayoutManager(InflationActivity.this, LinearLayoutManager.HORIZONTAL, false));
 
                 loadingDialog.dismissDialog();
-                Toast.makeText(InflationActivity.this, "Inflation MoM: "+ monthlyInflation +"%", Toast.LENGTH_SHORT).show();
+
             }
         });
+    }
+    private void setupCarouselModels(JSONArray data){
+        String[] carouselDescriptors = {"Latest", "Previous", "Change" };
+        String[] carouselStrings = new String[3];
+        JSONObject latestEconObject;
+        JSONObject prevEconObject;
+        String latestStat;
+        String prevStat;
+        Float delta;
+        String deltaDisplay;
 
+        try {
+            latestEconObject = data.getJSONObject(data.length()-1);
+            prevEconObject = data.getJSONObject(data.length()-2);
+            latestStat = latestEconObject.getString("value");
+            prevStat = prevEconObject.getString("value");
+            delta = Float.parseFloat(latestStat) - Float.parseFloat(prevStat);
+            deltaDisplay = String.format("%.2f", delta);
+
+            carouselStrings[0] = latestStat;
+            carouselStrings[1] = prevStat;
+            carouselStrings[2] = deltaDisplay;
+
+        } catch (JSONException e){
+            e.printStackTrace();
+        }
+        for (int i =0; i < carouselStrings.length; i++){
+            econCarouselModels.add(new Econ_Carousel_Model(carouselStrings[i],carouselDescriptors[i]));
+        }
     }
 }

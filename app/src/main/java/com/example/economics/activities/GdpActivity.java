@@ -23,9 +23,6 @@ public class GdpActivity extends AppCompatActivity {
     JSONArray dataArray;
     ArrayList<Econ_Carousel_Model> econCarouselModels = new ArrayList<>();
 
-    JSONObject latestGdpObject;
-    String latestGDP;
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
