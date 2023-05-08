@@ -17,6 +17,8 @@ public class GDPService {
     public static final String GDP_INTERVAL_QUARTERLY_APIKEY_DEMO = "https://www.alphavantage.co/query?function=REAL_GDP&interval=annual&apikey=demo";
     Context context;
     JSONArray gdpArray;
+    JSONArray sizedDown = new JSONArray();
+    JSONArray reversed = new JSONArray();
 
 
     public GDPService(Context context) {
@@ -40,10 +42,17 @@ public class GDPService {
 
                         try {
                             gdpArray = response.getJSONArray("data");
+                            for (int i = 0; i <20 ; i++){
+                                sizedDown.put(gdpArray.get(i));
+                            }
+
+                            for (int i = sizedDown.length()-1;i >= 0; i-- ){
+                                reversed.put(sizedDown.get(i));
+                            }
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
-                        volleyResponseListener.onResponse(gdpArray);
+                        volleyResponseListener.onResponse(reversed);
                     }
                 }, new Response.ErrorListener() {
 

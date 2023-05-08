@@ -1,21 +1,13 @@
 package com.example.economics;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
-import android.widget.Toast;
 
-import com.example.economics.services.ConsumerPriceIndexService;
-import com.example.economics.services.DurableService;
-import com.example.economics.services.FedFundsRateService;
-import com.example.economics.services.GDPService;
-import com.example.economics.services.UnemploymentService;
-import com.example.economics.services.YieldsService;
+import com.example.economics.adapters.Econ_RecylerViewAdapter;
+import com.example.economics.models.EconIndicatorModel;
 
 import java.util.ArrayList;
 

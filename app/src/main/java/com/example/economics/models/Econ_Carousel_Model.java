@@ -1,10 +1,10 @@
-package com.example.economics;
+package com.example.economics.models;
 
-public class FedFundsRateCarouselModel {
+public class Econ_Carousel_Model {
     String stat;
     String descriptor;
 
-    public FedFundsRateCarouselModel(String stat, String descriptor) {
+    public Econ_Carousel_Model(String stat, String descriptor) {
         this.stat = stat;
         this.descriptor = descriptor;
     }

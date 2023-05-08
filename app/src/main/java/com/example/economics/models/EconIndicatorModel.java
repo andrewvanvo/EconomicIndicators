@@ -1,4 +1,4 @@
-package com.example.economics;
+package com.example.economics.models;
 
 public class EconIndicatorModel {
     String indicatorName;

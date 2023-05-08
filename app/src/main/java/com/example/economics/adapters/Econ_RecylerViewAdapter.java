@@ -1,4 +1,4 @@
-package com.example.economics;
+package com.example.economics.adapters;
 
 import android.content.Context;
 import android.content.Intent;
@@ -11,6 +11,9 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.economics.models.EconIndicatorModel;
+import com.example.economics.MainActivity;
+import com.example.economics.R;
 import com.example.economics.activities.DurableActivity;
 import com.example.economics.activities.FedFundsRateActivity;
 import com.example.economics.activities.GdpActivity;

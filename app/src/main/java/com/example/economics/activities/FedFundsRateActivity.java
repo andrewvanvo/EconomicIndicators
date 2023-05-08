@@ -1,7 +1,6 @@
 package com.example.economics.activities;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -9,10 +8,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.economics.FFR_Carousel_RecylerViewAdapter;
-import com.example.economics.FedFundsRateCarouselModel;
+import com.example.economics.adapters.FFR_CarouselRecylerViewAdapter;
+import com.example.economics.models.Econ_Carousel_Model;
 
-import com.example.economics.FedFundsSparkAdapter;
+import com.example.economics.adapters.FedFundsSparkAdapter;
 import com.example.economics.LoadingDialog;
 import com.example.economics.R;
 import com.example.economics.services.FedFundsRateService;
@@ -27,7 +26,7 @@ import java.util.ArrayList;
 public class FedFundsRateActivity extends AppCompatActivity {
 
     JSONArray dataArray;
-    ArrayList<FedFundsRateCarouselModel> fedFundsRateCarouselModels = new ArrayList<>();
+    ArrayList<Econ_Carousel_Model> econCarouselModels = new ArrayList<>();
 
     FedFundsSparkAdapter fedFundsSparkAdapter;
     SparkView sparkView;
@@ -54,22 +53,13 @@ public class FedFundsRateActivity extends AppCompatActivity {
             @Override
             public void onResponse(JSONArray reversed) {
 
-
                 dataArray = reversed;
-//                JSONObject testobj;
-//                try {
-//                    testobj = reversed.getJSONObject(dataArray.length()-1);
-//                    Log.d("responseRcvd", testobj.toString());
-//                } catch (JSONException e) {
-//                    e.printStackTrace();
-//                }
-
 
                 //Recyclerview setups
                 RecyclerView carouselRecyclerView = findViewById(R.id.ffrCarouselRecyclerView);
-                setupFedFundsRateCarouselModels(dataArray);
+                setupCarouselModels(dataArray);
 
-                FFR_Carousel_RecylerViewAdapter adapter = new FFR_Carousel_RecylerViewAdapter(FedFundsRateActivity.this, fedFundsRateCarouselModels);
+                FFR_CarouselRecylerViewAdapter adapter = new FFR_CarouselRecylerViewAdapter(FedFundsRateActivity.this, econCarouselModels);
                 carouselRecyclerView.setAdapter(adapter);
                 carouselRecyclerView.setLayoutManager(new LinearLayoutManager(FedFundsRateActivity.this, LinearLayoutManager.HORIZONTAL, false));
 
@@ -129,7 +119,7 @@ public class FedFundsRateActivity extends AppCompatActivity {
         }
     }
 
-    private void setupFedFundsRateCarouselModels(JSONArray data){
+    private void setupCarouselModels(JSONArray data){
         String[] ffrCarouselDescriptors = {"Latest", "Previous", "Change" };
         String[] ffrCarouselStrings = new String[3];
 
@@ -156,7 +146,7 @@ public class FedFundsRateActivity extends AppCompatActivity {
             e.printStackTrace();
         }
         for (int i =0; i < ffrCarouselStrings.length; i++){
-            fedFundsRateCarouselModels.add(new FedFundsRateCarouselModel(ffrCarouselStrings[i],ffrCarouselDescriptors[i]));
+            econCarouselModels.add(new Econ_Carousel_Model(ffrCarouselStrings[i],ffrCarouselDescriptors[i]));
         }
     }
 
