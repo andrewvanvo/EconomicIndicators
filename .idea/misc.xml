@@ -6,6 +6,7 @@
         <entry key="..\:/Users/Red/Desktop/Code/EconomicIndicators/app/src/main/res/layout/activity_login.xml" value="0.3578125" />
         <entry key="..\:/Users/Red/Desktop/Code/EconomicIndicators/app/src/main/res/layout/activity_main.xml" value="0.33489583333333334" />
         <entry key="..\:/Users/Red/Desktop/Code/EconomicIndicators/app/src/main/res/layout/activity_registration.xml" value="0.3578125" />
+        <entry key="..\:/Users/Red/Desktop/EconomicIndicators/app/src/main/res/drawable/ic_baseline_exit_to_app_24.xml" value="0.32" />
         <entry key="..\:/Users/Red/Desktop/EconomicIndicators/app/src/main/res/drawable/ic_baseline_insert_chart_outlined_24.xml" value="0.194" />
         <entry key="..\:/Users/Red/Desktop/EconomicIndicators/app/src/main/res/layout/activity_durable.xml" value="0.38333333333333336" />
         <entry key="..\:/Users/Red/Desktop/EconomicIndicators/app/src/main/res/layout/activity_fed_funds_rate.xml" value="0.3536458333333333" />
@@ -14,6 +15,7 @@
         <entry key="..\:/Users/Red/Desktop/EconomicIndicators/app/src/main/res/layout/activity_main.xml" value="0.3536458333333333" />
         <entry key="..\:/Users/Red/Desktop/EconomicIndicators/app/src/main/res/layout/activity_treasury_yields.xml" value="0.38333333333333336" />
         <entry key="..\:/Users/Red/Desktop/EconomicIndicators/app/src/main/res/layout/activity_unemployment.xml" value="0.38333333333333336" />
+        <entry key="..\:/Users/Red/Desktop/EconomicIndicators/app/src/main/res/layout/header.xml" value="0.33489583333333334" />
         <entry key="..\:/Users/Red/Desktop/EconomicIndicators/app/src/main/res/layout/recycler_view_cpi_carousel_item.xml" value="0.38333333333333336" />
         <entry key="..\:/Users/Red/Desktop/EconomicIndicators/app/src/main/res/layout/recycler_view_durable_carousel_item.xml" value="0.38333333333333336" />
         <entry key="..\:/Users/Red/Desktop/EconomicIndicators/app/src/main/res/layout/recycler_view_ffr_carousel_item.xml" value="0.33" />
@@ -21,6 +23,7 @@
         <entry key="..\:/Users/Red/Desktop/EconomicIndicators/app/src/main/res/layout/recycler_view_row.xml" value="0.340625" />
         <entry key="..\:/Users/Red/Desktop/EconomicIndicators/app/src/main/res/layout/recycler_view_unemployment_carousel_item.xml" value="0.38333333333333336" />
         <entry key="..\:/Users/Red/Desktop/EconomicIndicators/app/src/main/res/layout/recycler_view_yields_carousel_item.xml" value="0.38333333333333336" />
+        <entry key="..\:/Users/Red/Desktop/EconomicIndicators/app/src/main/res/menu/main_menu.xml" value="0.3338541666666667" />
         <entry key="..\:/Users/Red/Desktop/Economics/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.298" />
         <entry key="..\:/Users/Red/Desktop/Economics/app/src/main/res/drawable/ic_fed_funds_rate.xml" value="0.3255" />
         <entry key="..\:/Users/Red/Desktop/Economics/app/src/main/res/drawable/ic_launcher_background.xml" value="0.298" />

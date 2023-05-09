@@ -9,4 +9,9 @@
         <item name="unemployment">Unemployment Rate</item>
         <item name="durable">Durable Goods Orders</item>
     </string-array>
+
+    <string name = "open">Open Navigation Drawer</string>
+    <string name = "close">Close Navigation Drawer</string>
+
+
 </resources>
