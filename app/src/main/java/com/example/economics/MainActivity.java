@@ -66,8 +66,17 @@ public class MainActivity extends AppCompatActivity {
                 switch (item.getItemId())
                 {
                     case R.id.menuLogout:{
-                        Toast.makeText(MainActivity.this, "Menu Logout Selected", Toast.LENGTH_SHORT).show();
+                        AuthUI.getInstance()
+                                .signOut(MainActivity.this)
 
+                                //redirecting to login page where our login flow is being displayed.
+                                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                    public void onComplete(@NonNull Task<Void> task) {
+                                        Toast.makeText(MainActivity.this, "User Signed Out", Toast.LENGTH_SHORT).show();
+                                        Intent i = new Intent(MainActivity.this, LoginActivity.class);
+                                        startActivity(i);
+                                    }
+                                });
                         break;
                     }
                 }
@@ -77,23 +86,23 @@ public class MainActivity extends AppCompatActivity {
 
 
         //logout button
-        Button logoutButton = findViewById(R.id.logout);
-        logoutButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                AuthUI.getInstance()
-                        .signOut(MainActivity.this)
-
-                        //redirecting to login page where our login flow is being displayed.
-                        .addOnCompleteListener(new OnCompleteListener<Void>() {
-                            public void onComplete(@NonNull Task<Void> task) {
-                                Toast.makeText(MainActivity.this, "User Signed Out", Toast.LENGTH_SHORT).show();
-                                Intent i = new Intent(MainActivity.this, LoginActivity.class);
-                                startActivity(i);
-                            }
-                        });
-            }
-        });
+//        Button logoutButton = findViewById(R.id.logout);
+//        logoutButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                AuthUI.getInstance()
+//                        .signOut(MainActivity.this)
+//
+//                        //redirecting to login page where our login flow is being displayed.
+//                        .addOnCompleteListener(new OnCompleteListener<Void>() {
+//                            public void onComplete(@NonNull Task<Void> task) {
+//                                Toast.makeText(MainActivity.this, "User Signed Out", Toast.LENGTH_SHORT).show();
+//                                Intent i = new Intent(MainActivity.this, LoginActivity.class);
+//                                startActivity(i);
+//                            }
+//                        });
+//            }
+//        });
 
         //main recycler view. Set up recycler adapter after models are set up!
         RecyclerView recyclerView = findViewById(R.id.econRecyclerView);
