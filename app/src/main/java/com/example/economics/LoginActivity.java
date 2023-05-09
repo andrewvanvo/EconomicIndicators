@@ -53,7 +53,7 @@ public class LoginActivity extends AppCompatActivity {
                                     .setIsSmartLockEnabled(false)
                                     // login options set above
                                     .setAvailableProviders(providers)
-
+                                    .setLogo(R.drawable.ic_baseline_insert_chart_outlined_24)
 
                                     //build the login screen
                                     .build(), RC_SIGN_IN
