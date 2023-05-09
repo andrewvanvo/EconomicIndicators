@@ -28,14 +28,17 @@ import java.util.Collections;
 
 public class MainActivity extends AppCompatActivity {
 
+    //drawer variables
     DrawerLayout drawerLayout;
     NavigationView navigationView;
     ActionBarDrawerToggle drawerToggle;
 
+    //recyclerview model setup
     ArrayList<EconIndicatorModel> econIndicatorModel = new ArrayList<>();
     int[] econIndicatorImages = {R.drawable.ic_fed_funds_rate, R.drawable.ic_gdp, R.drawable.ic_inflation,
             R.drawable.ic_yields, R.drawable.ic_unemployment, R.drawable.ic_durable};
 
+    //Drawer
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if(drawerToggle.onOptionsItemSelected(item)){
@@ -44,6 +47,7 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    //Main onCreate function
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,16 +65,9 @@ public class MainActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId())
                 {
-                    case R.id.menuHome:{
-                        Toast.makeText(MainActivity.this, "Menu Home Selected", Toast.LENGTH_SHORT).show();
-                        break;
-                    }
-                    case R.id.menuOTHER:{
-                        Toast.makeText(MainActivity.this, "Menu Other Selected", Toast.LENGTH_SHORT).show();
-                        break;
-                    }
                     case R.id.menuLogout:{
                         Toast.makeText(MainActivity.this, "Menu Logout Selected", Toast.LENGTH_SHORT).show();
+
                         break;
                     }
                 }

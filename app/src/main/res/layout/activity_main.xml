@@ -10,45 +10,41 @@
     android:id="@+id/drawer_layout"
     >
 
-    <com.google.android.material.navigation.NavigationView
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
 
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/econRecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="560dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:layout_editor_absoluteX="0dp" />
+
+        <Button
+                android:id="@+id/logout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:text="logout"
+                />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <com.google.android.material.navigation.NavigationView
         android:id="@+id/nav_view"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        app:headerLayout="@layout/header"
+
         app:menu="@menu/main_menu"
         android:layout_gravity="start"
         >
-
-
     </com.google.android.material.navigation.NavigationView>
-
-<androidx.constraintlayout.widget.ConstraintLayout
-
-    android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        >
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/econRecyclerView"
-        android:layout_width="match_parent"
-        android:layout_height="560dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:layout_editor_absoluteX="0dp" />
-
-    <Button
-            android:id="@+id/logout"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            android:text="logout"
-            />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.drawerlayout.widget.DrawerLayout>
 
