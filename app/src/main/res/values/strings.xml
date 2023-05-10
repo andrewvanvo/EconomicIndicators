@@ -15,5 +15,8 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
+    <string name="newsApiEndpoint">https://newsapi.org/v2/top-headlines?country=us&amp;category=business&amp;apiKey=</string>
+    <string name="newsApiKey">498ed30cae8749878faa58af5792ca6c</string>
+
 
 </resources>

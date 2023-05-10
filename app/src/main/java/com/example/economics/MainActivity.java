@@ -35,6 +35,11 @@ import java.util.Collections;
 
 public class MainActivity extends AppCompatActivity {
 
+    // TODO: 2023-05-10 Change API key for all econ indicators from demo to actual key
+    //TODO: Hide api keys w/ constants
+    //TODO: String resource all API endpoints
+    //TODO: restrict landscape mode
+
     //drawer variables
     DrawerLayout drawerLayout;
     NavigationView navigationView;
