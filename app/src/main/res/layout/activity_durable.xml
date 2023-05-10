@@ -18,13 +18,13 @@
     <com.robinhood.spark.SparkView
         android:id="@+id/durableSparkView"
         android:layout_width="match_parent"
-        android:layout_height="320dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="64dp"
 
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/durableCarouselRecyclerView"
-
-        app:layout_constraintVertical_bias="0.317"
-        tools:layout_editor_absoluteX="0dp" />
+        app:layout_constraintBottom_toTopOf="@+id/space"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/durableCarouselRecyclerView" />
 
     <TextView
         android:id="@+id/durableHistoricalDate"
@@ -34,7 +34,6 @@
         android:text=""
         app:layout_constraintBottom_toTopOf="@+id/durableSparkView"
         app:layout_constraintEnd_toStartOf="@+id/durableHistoricalStat"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
@@ -45,8 +44,15 @@
         android:text=""
         app:layout_constraintBottom_toTopOf="@+id/durableSparkView"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toEndOf="@+id/durableHistoricalDate" />
+
+    <Space
+        android:id="@+id/space"
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/durableCarouselRecyclerView"
+        app:layout_constraintStart_toStartOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

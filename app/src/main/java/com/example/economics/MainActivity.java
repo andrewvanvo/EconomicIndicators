@@ -59,6 +59,8 @@ public class MainActivity extends AppCompatActivity {
         //bottom nav
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         //setContentView(R.layout.activity_main);
+
+        //have to use bind for bottom nav bar and fragments
         setContentView(binding.getRoot());
         replaceFragment(new leftFragment());
 
