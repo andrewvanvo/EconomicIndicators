@@ -26,22 +26,30 @@
         </activity>
         <activity
             android:name=".activities.UnemploymentActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:label=""/>
         <activity
             android:name=".activities.DurableActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:label=""/>
         <activity
             android:name=".activities.TreasuryYieldsActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:label=""/>
         <activity
             android:name=".activities.InflationActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:label=""/>
         <activity
             android:name=".activities.FedFundsRateActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:label=""
+            />
         <activity
             android:name=".activities.GdpActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:label=""
+            />
         <activity
             android:name=".MainActivity"
             android:exported="false"
