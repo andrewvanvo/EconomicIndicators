@@ -2,6 +2,7 @@
 [Ongoing development]
 - placeholders active
 - styling/formatting on some view elements not yet implemented
+- News aggregator functionality WIP
 
 ## Description
 
