@@ -1,5 +1,5 @@
 # Economic Indicators 
-[Ongoing development]
+[Ongoing development, placeholders active]
 
 ## Description
 
