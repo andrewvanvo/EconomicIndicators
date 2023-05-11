@@ -1,5 +1,7 @@
 # Economic Indicators 
-[Ongoing development, placeholders active]
+[Ongoing development]
+- placeholders active
+- styling/formatting on some view elements not yet implemented
 
 ## Description
 
